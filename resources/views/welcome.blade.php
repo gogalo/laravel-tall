@@ -1,6 +1,11 @@
 <x-guest-layout>
     
-    <div class="flex flex-col bg-indigo-900 h-screen">
+    <div
+        x-data="{ 
+            showSubscribe: false 
+        }" 
+        class="flex flex-col bg-indigo-900 h-screen"
+    >
 
         <nav class="pt-5 flex justify-between container mx-auto text-indigo-200">
 
@@ -42,7 +47,7 @@
                 
                 </p>
 
-                <x-button class="py-3 px-8 bg-red-500 hover:bg-red-600">
+                <x-button x-on:click="showSubscribe = true" class="py-3 px-8 bg-red-500 hover:bg-red-600">
 
                     Subscribe
 
@@ -52,35 +57,45 @@
         
         </div>
 
+        <div 
+            x-show="showSubscribe" 
+            x-on:click.self="showSubscribe = false" 
+            x-on:keydown.escape.window="showSubscribe = false"
+            class="flex fixed top-0 w-full h-full bg-gray-900 bg-opacity-60 items-center"
+        >
+            
+            <div class="m-auto bg-pink-500 shadow-2xl rounded-xl p-8 ">
+
+                <p class="text-white font-extrabold text-5xl text-center w-full">
+                
+                    Let's do it!
+                
+                </p>
+
+                <form class="flex flex-col items-center p-24">
+
+                    <x-input class="px-5 py-3 w-80 border border-blue-400" type="email" name="email" placeholder="Email address"></x-input>
+                    
+                    <span class="text-gray-100 text-xs mt-2 italic w-80">
+                    
+                        We will send you a confirmation email.
+                    
+                    </span>
+                    
+                    <x-button class="px-5 py-3 mt-5 w-80 bg-blue-500 justify-center">
+
+                        Get In
+
+                    </x-button>
+
+                </form>
+
+            </div>
+
+        </div>
+
     </div>
     
-    <div class="flex flex-col bg-pink-500 h-screen">
-
-        <p class="text-white font-extrabold text-5xl text-center w-full">
-        
-            Let's do it!
-        
-        </p>
-
-        <form class="flex flex-col items-center p-24">
-
-            <x-input class="px-5 py-3 w-80 border border-blue-400" type="email" name="email" placeholder="Email address"></x-input>
-            
-            <span class="text-gray-100 text-xs mt-2 italic w-80">
-            
-                We will send you a confirmation email.
-            
-            </span>
-            
-            <x-button class="px-5 py-3 mt-5 w-80 bg-blue-500 justify-center">
-
-                Get In
-
-            </x-button>
-
-
-        </form>
-
-    </div>
+    
     
 </x-guest-layout>
