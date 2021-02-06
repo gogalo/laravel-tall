@@ -26,7 +26,7 @@
                         
                         <li class="text-blue-500 hover:underline">
 
-                            <a href="#">Manage subscribers</a>    
+                            <a href="{{route('subscribers.all')}}">Manage subscribers</a>    
                         
                         </li>
                     
