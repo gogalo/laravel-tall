@@ -71,7 +71,7 @@
 
         <form class="flex flex-col items-center p-24" wire:submit.prevent="subscribe">
 
-            <x-input wire:model="email" class="px-5 py-3 w-80 border border-blue-400" type="email" name="email" placeholder="Email address"></x-input>
+            <x-input wire:model.defer="email" class="px-5 py-3 w-80 border border-blue-400" type="email" name="email" placeholder="Email address"></x-input>
             
             <span class="text-gray-100 text-xs mt-2 italic w-80">
             
