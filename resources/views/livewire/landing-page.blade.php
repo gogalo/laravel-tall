@@ -85,7 +85,8 @@
             
             <x-button class="px-5 py-3 mt-5 w-80 bg-blue-500 justify-center">
 
-                Get In
+                <span wire:loading wire:target="subscribe" class="animate-spin">&#9696</span>
+                <span wire:loading.remove wire:target="subscribe">Get In</span>
 
             </x-button>
 
