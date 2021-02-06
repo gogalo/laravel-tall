@@ -1,7 +1,12 @@
+
 <div
+    {{-- 
+        mediante @entangle enlazamos las propiedades del componente de liveware y las propiedades de alpine, 
+        ahora los valores se pueden establecer/modificar tambien desde el componente y no solo en la vista. 
+    --}}
     x-data="{ 
-        showSubscribe: false,
-        showSuccess: false
+        showSubscribe: @entangle('showSubscribe'),
+        showSuccess: @entangle('showSuccess'),
     }" 
     class="flex flex-col bg-indigo-900 h-screen"
 >
