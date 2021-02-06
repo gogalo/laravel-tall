@@ -56,8 +56,6 @@ class LandingPage extends Component
                 );
             });
             
-
-
             $subscriber->notify($notification);
 
         }, $deadlockRetries = 5);
