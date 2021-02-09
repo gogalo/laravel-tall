@@ -15,6 +15,8 @@
 
         @livewireStyles
 
+        @stack('styles')
+
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
@@ -35,7 +37,11 @@
             </main>
         </div>
 
+        @stack('modals')
+
         @livewireScripts
+
+        @stack('scripts')
 
     </body>
 </html>
