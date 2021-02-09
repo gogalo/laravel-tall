@@ -14,7 +14,21 @@
             </button>
         </div>
     @endif
-    <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10">Create New Company</button>
+
+    <div class="w-full text-right">
+        <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10">Create New Company</button>
+
+        <select
+            class="rounded-lg border border-gray-300 w-"
+            wire:model="itemsPerPage"
+            wire:change="refreshPage()"
+        >
+            @foreach($perPageValues as $value)
+                <option value="{{$value}}">{{$value}}</option>
+            @endforeach
+        </select>
+    </div>
+
     @if (count($companies)>0)
         <div class="py-10">
             <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -46,40 +60,36 @@
                     @endforeach
                     </tbody>
                 </table>
+
+                {{ $companies->links('pagination',['is_livewire' => true]) }}
+
             </div>
         </div>
     @endif
     @if($isOpen)
-        <div class="fixed z-100 w-full h-full bg-gray-500 opacity-75 top-0 left-0"></div>
-        <div class="fixed z-101 w-full h-full top-0 left-0 overflow-y-auto">
-            <div class="table w-full h-full py-6">
-                <div class="table-cell text-center align-middle">
-                    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl">
-                            <form>
-                                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                    <div class="flex flex-wrap -mx-3 mb-6">
-                                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                            <label for="titleInput" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
-                                            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="titleInput" placeholder="Enter Title" wire:model="title">
-                                            @error('title') <span class="text-red-500">{{ $message }}</span>@enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                <span class="flex w-full sm:ml-3 sm:w-auto">
-                                    <button wire:click.prevent="store()" type="button" class="inline-flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
-                                </span>
-                                    <span class="mt-3 flex w-full sm:mt-0 sm:w-auto">
-                                    <button wire:click="closeModal()" type="button" class="inline-flex bg-white hover:bg-gray-200 border border-gray-300 text-gray-500 font-bold py-2 px-4 rounded">Cancel</button>
-                                </span>
-                                </div>
-                            </form>
+        <x-customised-modal>
+            <x-slot name="content">
+                <form>
+                    <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label for="titleInput" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="titleInput" placeholder="Enter Title" wire:model="title">
+                                @error('title') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <span class="flex w-full sm:ml-3 sm:w-auto">
+                        <button wire:click.prevent="store()" type="button" class="inline-flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
+                    </span>
+                        <span class="mt-3 flex w-full sm:mt-0 sm:w-auto">
+                        <button wire:click="closeModal()" type="button" class="inline-flex bg-white hover:bg-gray-200 border border-gray-300 text-gray-500 font-bold py-2 px-4 rounded">Cancel</button>
+                    </span>
+                    </div>
+                </form>
+            </x-slot>
+        </x-customised-modal>
     @endif
 </div>
 
